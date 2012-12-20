@@ -13,7 +13,7 @@
 #include <cmath>
 
 #define MAP_SIZE 256
-#define BLOC_SIZE 4
+#define BLOC_SIZE 8
 
 float distance(float x1, float y1, float x2, float y2) {
 	return sqrt( pow(x2 - x1, 2) + pow(y2 - y1, 2));
@@ -23,14 +23,24 @@ float distance(float x1, float y1, float x2, float y2) {
 void calculate(int (&map)[MAP_SIZE][MAP_SIZE], int t) {
 	for (int x = 0; x < MAP_SIZE; x++) {
 		for (int y = 0; y < MAP_SIZE; y++) {
-			map[x][y] = 127+ 128* sin(  (cos(x*50) +t - cos(y*25) + distance(x,y, 35,120))/ 1.01255);
-		//	std::cout <<map[x][y] << std::endl;
+			//map[x][y] = 127+ 128* sin( t * 3.14159 / 180);
+			map[x][y] =  MAP_SIZE/2 + MAP_SIZE/2* sin(distance(x, y, 128+128*cos(t*3.14159/180),128));
+
+			//	std::cout <<map[x][y] << std::endl;
 		}
 	}
 }
 
+/*
+ * TODO
+ * - screenshot
+ * - chgt palette
+ * - chgt algo
+ *
+ */
+
 int main(void) {
-	sf::RenderWindow App(sf::VideoMode(800, 600, 32), "Plasmou");
+	sf::RenderWindow App(sf::VideoMode(1024, 1024, 32), "Plasmou");
 	App.EnableVerticalSync(true);
 
 	int  map[MAP_SIZE][MAP_SIZE];
@@ -39,8 +49,11 @@ int main(void) {
 	sf::Vector2f rect(BLOC_SIZE, BLOC_SIZE);
 
 	sf::Color palette[256];
+	int j, k, l;
 	for (int i = 0; i < 256; i++) {
-		palette[i] = sf::Color(i, i, i,255);
+		j =  k = l =   sin(i * 180/255 * 3.14159265/180) *255;
+
+		palette[i] = sf::Color(j, k, l,255);
 		//std::cout << (int)palette[i].r << std::endl;
 	}
 
