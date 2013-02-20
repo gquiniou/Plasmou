@@ -1,13 +1,11 @@
-CPPFLAGS= -ID:\dev\libs\SFML-2.0\include -I./include
 
+CXXFLAGS=-O2 -g -Wall -fmessage-length=0 -Wextra -std=c++0x 
 
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -Wextra -std=c++0x 
+OBJS=Plasmou.o
 
-OBJS =		Plasmou.o
+LIBS= -lsfml-system -lsfml-window -lsfml-graphics
 
-LIBS = -LD:\dev\libs\SFML-2.0\lib  -lsfml-system -lsfml-window -lsfml-graphics
-
-TARGET =	Plasmou.exe
+TARGET=Plasmou
 
 $(TARGET):	$(OBJS)
 	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
